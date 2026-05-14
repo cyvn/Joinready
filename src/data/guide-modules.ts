@@ -1,0 +1,834 @@
+import type { GuideModule } from "@/src/types/guide";
+
+export const guideModules: GuideModule[] = [
+  {
+    id: "general-knowledge",
+    title: "General Knowledge",
+    description: "Understand how the military works, what to expect, and how to ask the right questions before committing.",
+    pdfSlug: "general-knowledge",
+    lessons: [
+      {
+        id: "military-structure",
+        title: "How the Military is Organized",
+        summary: "Learn about enlisted vs. officer paths, ranks, and the chain of command.",
+        sections: [
+          {
+            heading: "Enlisted vs. Officer",
+            body: "Most people join the military as enlisted personnel. Enlisted service members carry out day-to-day operations and are the backbone of any military. Officers generally lead enlisted personnel and take on greater strategic responsibility. Officers typically require a bachelor's degree, while enlisted roles generally require a high school diploma or equivalent. Understanding this difference helps you decide which path may be worth exploring further.",
+          },
+          {
+            heading: "Ranks and Progression",
+            body: "Each branch has its own rank system. In most western militaries, enlisted ranks progress from entry-level (private, seaman recruit, airman basic, etc.) upward through non-commissioned officer (NCO) ranks. Promotions are typically based on time in service, performance, and passing evaluations or tests. Knowing the rank structure of your target branch can help you understand what a career path might look like.",
+          },
+          {
+            heading: "The Chain of Command",
+            body: "The chain of command is the line of authority from the highest-ranking leader down to individual service members. Understanding this structure helps explain how orders are communicated, how decisions are made, and how accountability works in a military environment.",
+          },
+        ],
+        checklistItems: [
+          "I can explain the difference between enlisted and officer service",
+          "I understand that military branches each have their own rank systems",
+          "I know what a chain of command means",
+        ],
+      },
+      {
+        id: "contract-basics",
+        title: "Understanding Your Service Contract",
+        summary: "What a military contract means, what it typically includes, and what questions to ask before signing.",
+        sections: [
+          {
+            heading: "What a Contract Covers",
+            body: "A military service contract typically specifies your service obligation (length of time), your branch, your initial training requirements, and sometimes your specific career field or job specialty. It is a legally binding document. Reading it carefully — and asking questions before signing — is essential.",
+          },
+          {
+            heading: "Enlistment Length",
+            body: "Typical initial enlistment periods vary. Many countries offer 2, 4, or 6-year terms for enlisted personnel. Some roles or branches may have different requirements. Bonuses or training programs may come with longer service commitments. Always ask what the exact service obligation is for your selected career field.",
+          },
+          {
+            heading: "Questions to Ask Before Signing",
+            body: "Before signing any document, consider asking: What exactly is my service obligation? What is my guaranteed job or specialty? What happens if I do not qualify medically for my chosen role? What are my options if my preferred job is unavailable? What training is guaranteed in writing? Getting answers in writing when possible is advisable.",
+          },
+        ],
+        checklistItems: [
+          "I understand that a service contract is legally binding",
+          "I know what questions to ask before signing any agreement",
+          "I have identified the typical service commitment for my country and branch",
+        ],
+      },
+      {
+        id: "benefits-overview",
+        title: "Common Military Benefits",
+        summary: "A general overview of benefits that many militaries offer, and why verifying current benefits is important.",
+        sections: [
+          {
+            heading: "Common Types of Benefits",
+            body: "Many militaries offer a range of benefits that can include: base pay and allowances, housing or housing allowances, health care and dental coverage, education assistance (such as the GI Bill in the U.S.), retirement plans, life insurance, and access to base facilities. Benefits vary significantly by country, branch, and service status.",
+          },
+          {
+            heading: "Why Verification Matters",
+            body: "Benefits can change. Legislation, budget decisions, and branch-specific policies can affect what is available at any given time. Any information you find online — including this guide — should be verified directly with official sources before making decisions.",
+          },
+        ],
+        checklistItems: [
+          "I understand that benefits vary by country, branch, and role",
+          "I know I need to verify current benefits through official channels",
+        ],
+      },
+      {
+        id: "recruiter-questions",
+        title: "Talking to a Recruiter",
+        summary: "How to approach recruiter conversations with the right mindset and the right questions.",
+        sections: [
+          {
+            heading: "What Recruiters Do",
+            body: "Recruiters are responsible for helping potential applicants understand the joining process and matching them to available positions. They are a valuable source of information, but their role also involves meeting enlistment goals. This does not mean they will mislead you, but it means you should come prepared with your own questions and not rely solely on what you are told without verifying it yourself.",
+          },
+          {
+            heading: "Questions Worth Asking",
+            body: "Some useful questions to consider: What jobs are currently available? What are the current fitness standards? What happens if I fail a fitness test? Can I see my guaranteed job in writing before I sign? What is the current wait time to ship to training? What waivers might I need? Are there any bonuses, and are they guaranteed in writing?",
+          },
+          {
+            heading: "Your Right to Take Time",
+            body: "You are not obligated to sign anything on your first visit. Taking time to research, compare options, and consult people you trust is reasonable. A decision to serve is a major life commitment.",
+          },
+        ],
+        checklistItems: [
+          "I have a list of questions prepared before speaking with a recruiter",
+          "I understand that I can take time before making a decision",
+          "I know which documents or verifications to seek in writing",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "gk-q1",
+        question: "What is the main difference between enlisted and officer military service?",
+        options: [
+          "Enlisted personnel work outdoors; officers work in offices",
+          "Officers generally require a degree and lead enlisted personnel; enlisted carry out day-to-day operations",
+          "Enlisted get more pay than officers",
+          "Officers do not serve in combat roles",
+        ],
+        correctAnswer: "Officers generally require a degree and lead enlisted personnel; enlisted carry out day-to-day operations",
+        explanation: "Most people join as enlisted personnel, who form the operational backbone of a military. Officers typically require a degree and take on leadership and strategic responsibilities.",
+        lessonId: "military-structure",
+        lessonTitle: "How the Military is Organized",
+      },
+      {
+        id: "gk-q2",
+        question: "Before signing a military service contract, what is advisable?",
+        options: [
+          "Sign as quickly as possible to secure a bonus",
+          "Only read the first page",
+          "Ask questions, seek written guarantees, and verify all details",
+          "Trust verbal promises without documentation",
+        ],
+        correctAnswer: "Ask questions, seek written guarantees, and verify all details",
+        explanation: "A military service contract is legally binding. Asking questions, seeking written guarantees for your job and terms, and verifying all details before signing is highly advisable.",
+        lessonId: "contract-basics",
+        lessonTitle: "Understanding Your Service Contract",
+      },
+      {
+        id: "gk-q3",
+        question: "Why is it important to verify military benefits through official sources?",
+        options: [
+          "Because unofficial sources always exaggerate benefits",
+          "Because benefits can change based on legislation and policy",
+          "Because recruiters are not allowed to discuss benefits",
+          "Because benefits are the same in every branch",
+        ],
+        correctAnswer: "Because benefits can change based on legislation and policy",
+        explanation: "Military benefits vary by country, branch, and role, and can change over time due to legislation and policy. Always verify current benefits through official government or military sources.",
+        lessonId: "benefits-overview",
+        lessonTitle: "Common Military Benefits",
+      },
+      {
+        id: "gk-q4",
+        question: "Are you required to sign a military contract on your first visit to a recruiter?",
+        options: [
+          "Yes, spots fill up quickly",
+          "No, you have the right to take time before deciding",
+          "Only if you are under 18",
+          "Yes, after completing the aptitude test",
+        ],
+        correctAnswer: "No, you have the right to take time before deciding",
+        explanation: "Joining the military is a major life decision. You are not obligated to sign anything on your first recruiter visit. Taking time to research and consult others is your right.",
+        lessonId: "recruiter-questions",
+        lessonTitle: "Talking to a Recruiter",
+      },
+    ],
+  },
+  {
+    id: "physical-prep",
+    title: "Physical Prep",
+    description: "Understand what fitness is typically expected, how to start preparing, and how to reduce injury risk before and during training.",
+    pdfSlug: "physical-prep",
+    lessons: [
+      {
+        id: "fitness-standards",
+        title: "Fitness Standards and Why They Vary",
+        summary: "How physical requirements differ by country, branch, role, age, and gender — and why verifying the current standard matters.",
+        sections: [
+          {
+            heading: "Standards Are Not Universal",
+            body: "Physical fitness standards differ significantly between countries, branches, and even specific roles within a branch. A combat infantry role typically requires higher fitness than a logistics or administrative role. Standards may also differ based on your age and, in many militaries, your gender. Do not assume one standard applies everywhere.",
+          },
+          {
+            heading: "Common Fitness Tests",
+            body: "Many military fitness tests include some combination of running (often a timed 1.5 or 2 mile run), push-ups, sit-ups or crunches, and sometimes pull-ups, a plank hold, or a beep/shuttle test. Some branches also test swimming. The specific events, standards, and scoring systems vary widely.",
+          },
+          {
+            heading: "Where to Verify Current Standards",
+            body: "The most reliable way to find current fitness requirements is to check the official website of the specific branch you are interested in, or to ask a recruiter. Do not rely solely on unofficial sources, including this guide. Standards change, and what was required a few years ago may not reflect current requirements.",
+          },
+        ],
+        checklistItems: [
+          "I understand that fitness standards vary by country, branch, age, gender, and role",
+          "I know the general fitness events common in military testing",
+          "I have identified where to verify the current standards for my country and branch",
+        ],
+      },
+      {
+        id: "cardio-basics",
+        title: "Running and Cardio Basics",
+        summary: "A beginner-friendly starting point for building cardiovascular fitness for military preparation.",
+        sections: [
+          {
+            heading: "Why Cardio Matters",
+            body: "Running and aerobic fitness are central to most military fitness programs. Basic training involves significant physical activity over many weeks. Building a cardiovascular base before training begins can reduce your risk of stress injuries and help you perform better during testing.",
+          },
+          {
+            heading: "Starting a Running Program",
+            body: "If you are not currently running, starting gradually is important. A common approach is to alternate walking and running (e.g., run 1 minute, walk 2 minutes, repeat for 20 minutes) and progressively increase the running portion over weeks. Many structured programs — such as Couch to 5K — follow this approach. Consistency matters more than intensity at the beginning.",
+          },
+          {
+            heading: "Target Distances",
+            body: "Many military fitness tests require running 1.5 to 2 miles within a target time. Working toward running 2–3 miles continuously at a comfortable pace first is a reasonable foundation, after which you can focus on improving speed. Introduce interval training (short bursts at higher intensity) once you have built a base.",
+          },
+        ],
+        checklistItems: [
+          "I understand why cardiovascular fitness is important for military training",
+          "I have a basic plan for building my running fitness progressively",
+          "I know that starting gradually reduces injury risk",
+        ],
+      },
+      {
+        id: "strength-basics",
+        title: "Strength Training Basics",
+        summary: "Building functional strength for military preparation without overcomplicating the process.",
+        sections: [
+          {
+            heading: "Functional Strength",
+            body: "Military preparation benefits most from functional strength — the ability to perform push-ups, pull-ups, carrying loads, and sustained physical effort. You do not need to be a powerlifter. Focusing on compound bodyweight and free-weight movements is a practical approach.",
+          },
+          {
+            heading: "Key Exercises to Consider",
+            body: "Push-ups, pull-ups or rows, sit-ups or planks, squats, and lunges are all foundational. Starting with bodyweight versions and focusing on form before adding resistance is advisable. If you are new to strength training, a simple 3-day-per-week program of compound movements is a reasonable starting point.",
+          },
+          {
+            heading: "Progressive Overload",
+            body: "Gradually increasing difficulty over time — adding repetitions, sets, or resistance as you adapt — is how strength improves. Tracking your numbers and aiming for small consistent improvements is more effective than occasional intense sessions.",
+          },
+        ],
+        checklistItems: [
+          "I understand what functional strength means in a military context",
+          "I know which basic exercises are relevant to military fitness testing",
+          "I understand the principle of progressively increasing difficulty over time",
+        ],
+      },
+      {
+        id: "recovery-injury-prevention",
+        title: "Recovery and Injury Prevention",
+        summary: "How to train smart and reduce the risk of injury before and during military service.",
+        sections: [
+          {
+            heading: "Why Recovery Matters",
+            body: "Many applicants make the mistake of training too hard too quickly and arrive at basic training with pre-existing injuries. Stress fractures, shin splints, and soft tissue injuries are common consequences of ramping up physical activity too fast. Allowing your body to adapt gradually is as important as the training itself.",
+          },
+          {
+            heading: "Sleep and Nutrition",
+            body: "Sleep is when your body repairs and strengthens. Aiming for 7–9 hours per night during a training phase is a widely recommended baseline. Nutrition — particularly adequate protein, carbohydrates, and hydration — supports training and recovery. You do not need to follow a complex diet, but eating consistently and staying hydrated is meaningful.",
+          },
+          {
+            heading: "Recognizing Warning Signs",
+            body: "Persistent pain that does not improve with rest, swelling, or sharp pain during exercise are signs that you may need to reduce intensity or consult a health professional. Training through significant pain can worsen injuries. Consulting a doctor or physiotherapist before beginning an intensive training program is wise if you have any existing health concerns.",
+          },
+        ],
+        checklistItems: [
+          "I understand the importance of gradual progression to avoid injury",
+          "I know the role of sleep and nutrition in physical preparation",
+          "I know the warning signs that suggest I should slow down or seek medical advice",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "pp-q1",
+        question: "What should you do before assuming you know the fitness requirements for a specific military role?",
+        options: [
+          "Start training immediately at maximum intensity",
+          "Verify the current standards with official sources for your country, branch, age, and role",
+          "Ask a friend who served five years ago",
+          "Assume all branches use the same standard",
+        ],
+        correctAnswer: "Verify the current standards with official sources for your country, branch, age, and role",
+        explanation: "Fitness standards vary by country, branch, age, gender, and role, and can change over time. Always verify the current requirements through official sources.",
+        lessonId: "fitness-standards",
+        lessonTitle: "Fitness Standards and Why They Vary",
+      },
+      {
+        id: "pp-q2",
+        question: "What is the most common mistake new trainees make that leads to injury?",
+        options: [
+          "Warming up too long",
+          "Drinking too much water",
+          "Ramping up training intensity too quickly without allowing adaptation",
+          "Sleeping too many hours",
+        ],
+        correctAnswer: "Ramping up training intensity too quickly without allowing adaptation",
+        explanation: "Stress fractures, shin splints, and overuse injuries frequently result from increasing training load too rapidly. Gradual progression allows the body to adapt safely.",
+        lessonId: "recovery-injury-prevention",
+        lessonTitle: "Recovery and Injury Prevention",
+      },
+      {
+        id: "pp-q3",
+        question: "Why is cardiovascular fitness important to build before joining?",
+        options: [
+          "Military jobs are mostly running-based",
+          "Basic training involves sustained physical activity; a cardio base reduces injury risk and improves performance",
+          "It replaces the need for strength training",
+          "It is only required for combat roles",
+        ],
+        correctAnswer: "Basic training involves sustained physical activity; a cardio base reduces injury risk and improves performance",
+        explanation: "Basic training is physically demanding over many weeks. Arriving with a cardiovascular base helps you keep up with the demands, recover faster, and reduces injury risk.",
+        lessonId: "cardio-basics",
+        lessonTitle: "Running and Cardio Basics",
+      },
+      {
+        id: "pp-q4",
+        question: "What does 'progressive overload' mean in a training context?",
+        options: [
+          "Working out as hard as possible from day one",
+          "Gradually increasing difficulty over time so the body adapts and improves",
+          "Alternating between very hard and very easy days",
+          "Only training one body part per week",
+        ],
+        correctAnswer: "Gradually increasing difficulty over time so the body adapts and improves",
+        explanation: "Progressive overload means consistently increasing the challenge — more reps, sets, weight, or distance over time. This is how the body builds strength and endurance safely.",
+        lessonId: "strength-basics",
+        lessonTitle: "Strength Training Basics",
+      },
+    ],
+  },
+  {
+    id: "mental-prep",
+    title: "Mental Prep",
+    description: "Prepare your mind for the demands of military service — discipline, stress, separation, and teamwork.",
+    pdfSlug: "mental-prep",
+    lessons: [
+      {
+        id: "discipline-routine",
+        title: "Discipline and Routine",
+        summary: "Why structure and self-discipline are central to military life — and how to begin building them.",
+        sections: [
+          {
+            heading: "What Military Discipline Means",
+            body: "Military discipline is about following standards, completing tasks reliably, and meeting expectations even when motivation is low. It is not about fear — it is about building habits and accountability that allow teams to function under pressure. Developing this before you join can make the transition to training significantly easier.",
+          },
+          {
+            heading: "Building a Personal Routine",
+            body: "A simple way to start building discipline is to establish a consistent daily routine. Waking at the same time, completing planned training sessions, and following through on commitments are small daily practices that build the mental muscle for structure. These habits become a foundation during training when the military provides the structure for you.",
+          },
+        ],
+        checklistItems: [
+          "I understand what discipline means in a military context",
+          "I have begun building a consistent daily routine",
+          "I can identify areas where I struggle with follow-through",
+        ],
+      },
+      {
+        id: "stress-management",
+        title: "Stress Management",
+        summary: "Practical ways to build stress tolerance before military training.",
+        sections: [
+          {
+            heading: "What Stress in Training Looks Like",
+            body: "Military basic training is designed to be stressful. Sleep deprivation, physical strain, unfamiliar authority, time pressure, and being far from home are common elements. Many trainees find the mental challenge harder than the physical one. Understanding this in advance is the first step to managing it.",
+          },
+          {
+            heading: "Practical Stress Tools",
+            body: "Controllable breathing — such as box breathing (inhale 4 counts, hold 4, exhale 4, hold 4) — is a simple tool used to manage acute stress responses. Regular physical exercise, sufficient sleep, and reducing unnecessary stressors in your current life are all preparation strategies worth considering.",
+          },
+          {
+            heading: "Perspective",
+            body: "Remembering that training is temporary and that countless others have completed the same program can help maintain perspective. Focusing on getting through the current day or task rather than the entire training period is a strategy many successful trainees report using.",
+          },
+        ],
+        checklistItems: [
+          "I understand that basic training is intentionally stressful",
+          "I know at least one practical technique for managing acute stress",
+          "I have thought about how I handle pressure situations currently",
+        ],
+      },
+      {
+        id: "teamwork-separation",
+        title: "Teamwork and Separation from Home",
+        summary: "How to prepare for living away from family and working closely with a diverse team.",
+        sections: [
+          {
+            heading: "Living Away from Home",
+            body: "Military service typically involves leaving home for extended periods. For many, this is the first time living away from family. Acknowledging that homesickness is normal and that most trainees experience it can help reduce the sense of isolation. Staying connected through permitted communication channels and focusing on building new connections with peers is a constructive approach.",
+          },
+          {
+            heading: "Working as Part of a Team",
+            body: "Military units depend on trust and collective performance. Your team's success often matters more than individual achievement. Being able to set aside personal preferences, communicate clearly, and support others — including people very different from you — is a key skill in military environments. Many recruits find this is the most personally transformative part of service.",
+          },
+        ],
+        checklistItems: [
+          "I have considered what it will mean to live away from home",
+          "I have thought about how I work in team environments",
+          "I understand that unit cohesion is a central value in military service",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "mp-q1",
+        question: "What is military discipline primarily about?",
+        options: [
+          "Punishment and fear",
+          "Showing off physical ability",
+          "Following standards and meeting expectations reliably, even when motivation is low",
+          "Competing with peers",
+        ],
+        correctAnswer: "Following standards and meeting expectations reliably, even when motivation is low",
+        explanation: "Discipline in a military context is about building reliable habits and accountability that allow teams to function under pressure — not fear or punishment.",
+        lessonId: "discipline-routine",
+        lessonTitle: "Discipline and Routine",
+      },
+      {
+        id: "mp-q2",
+        question: "What do many successful basic training graduates report about getting through difficult training periods?",
+        options: [
+          "They focused on how much longer training had to go",
+          "They focused on getting through the current day or task, not the entire program",
+          "They avoided thinking about stress entirely",
+          "They competed aggressively with teammates",
+        ],
+        correctAnswer: "They focused on getting through the current day or task, not the entire program",
+        explanation: "Breaking a long, difficult experience into smaller, manageable units — one day or one task at a time — is a strategy many trainees find effective for maintaining mental endurance.",
+        lessonId: "stress-management",
+        lessonTitle: "Stress Management",
+      },
+    ],
+  },
+  {
+    id: "testing-education",
+    title: "Testing & Education",
+    description: "Understand aptitude testing requirements, how to prepare for them, and education expectations.",
+    pdfSlug: "testing-education",
+    lessons: [
+      {
+        id: "aptitude-tests",
+        title: "Military Aptitude Tests",
+        summary: "What aptitude tests are, why they matter, and what they typically cover.",
+        sections: [
+          {
+            heading: "What Is a Military Aptitude Test?",
+            body: "Most militaries use standardized aptitude tests to determine eligibility and, importantly, which career fields a candidate qualifies for. In the United States, this is the ASVAB (Armed Services Vocational Aptitude Battery). The UK uses the BARB (British Army Recruit Battery). Canada uses the CFAT (Canadian Forces Aptitude Test). Other countries have their own equivalent assessments. The test you need depends entirely on which country's military you are pursuing.",
+          },
+          {
+            heading: "Why Your Score Matters",
+            body: "A higher score typically gives you access to more career field options. Some highly technical or specialized roles require significantly higher scores than general roles. Knowing the minimum score for your target career field before testing is worth researching.",
+          },
+          {
+            heading: "What Is Typically Tested",
+            body: "Common aptitude test areas include: arithmetic reasoning, mathematics knowledge, word knowledge / reading comprehension, mechanical comprehension, electronics principles, and general science. The relative weighting of each area differs by country and test.",
+          },
+        ],
+        checklistItems: [
+          "I know which aptitude test applies to my country and branch",
+          "I understand that my score influences which career fields are available to me",
+          "I know the general subject areas covered by the aptitude test",
+        ],
+      },
+      {
+        id: "study-planning",
+        title: "How to Study and Prepare",
+        summary: "Practical study strategies for aptitude test preparation.",
+        sections: [
+          {
+            heading: "Start with a Diagnostic",
+            body: "Before studying, take a practice test (many are available online for tests like the ASVAB) to identify your weaker areas. Focusing your study time on subjects you score lowest on will generally produce the greatest improvement.",
+          },
+          {
+            heading: "Consistent Study Beats Cramming",
+            body: "Studying 30–60 minutes per day over several weeks is more effective than last-minute cramming. Spaced repetition — reviewing material at increasing intervals — helps information move into long-term memory. Flashcards for vocabulary and math formulas can be effective tools.",
+          },
+          {
+            heading: "Use Official and Verified Resources",
+            body: "Official study guides published by the relevant military or testing organization are generally the most accurate. Supplementary resources such as Khan Academy are valuable for math and science fundamentals. Many libraries offer access to prep materials for free.",
+          },
+        ],
+        checklistItems: [
+          "I have taken a practice aptitude test to assess my current level",
+          "I have a study schedule that covers my weaker areas",
+          "I know where to find reliable study resources",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "te-q1",
+        question: "Why does a higher aptitude test score generally benefit a military applicant?",
+        options: [
+          "It guarantees promotion",
+          "It gives access to more career field options",
+          "It reduces training length",
+          "It increases base pay immediately",
+        ],
+        correctAnswer: "It gives access to more career field options",
+        explanation: "A higher aptitude test score typically qualifies you for a wider range of career specializations, including more technical and competitive roles.",
+        lessonId: "aptitude-tests",
+        lessonTitle: "Military Aptitude Tests",
+      },
+      {
+        id: "te-q2",
+        question: "What is the most effective study approach for aptitude test preparation?",
+        options: [
+          "Studying intensely the night before the test",
+          "Only reviewing subjects you already know well",
+          "Consistent daily study over several weeks, focusing on weak areas",
+          "Memorizing answers from a single source",
+        ],
+        correctAnswer: "Consistent daily study over several weeks, focusing on weak areas",
+        explanation: "Consistent, spaced study over time is more effective than cramming. Starting with a diagnostic to identify weaknesses allows you to target your efforts most efficiently.",
+        lessonId: "study-planning",
+        lessonTitle: "How to Study and Prepare",
+      },
+    ],
+  },
+  {
+    id: "english",
+    title: "English",
+    description: "Build the English language skills needed for military aptitude tests, training, and service — especially if English is not your first language.",
+    pdfSlug: "english",
+    lessons: [
+      {
+        id: "military-vocabulary",
+        title: "Military English Vocabulary",
+        summary: "Key English words and phrases commonly used in military contexts.",
+        sections: [
+          {
+            heading: "Why English Matters",
+            body: "Many militaries — including the U.S., UK, Canada, and Australia — conduct all training and operations in English. Even in non-English-speaking countries with close NATO ties, English is often used in joint operations. Strong English reading and comprehension skills are important for understanding contracts, following instructions during training, and performing well on aptitude tests.",
+          },
+          {
+            heading: "Common Military Terms to Know",
+            body: "Some terms frequently encountered: Rank (your position in the hierarchy), MOS/AFSC/Rate/Trade (your job specialty), Orders (instructions from superiors), Chain of command (line of authority), Barracks (housing on base), Formation (organized group arrangement), Drill (physical training or marching practice), Duty station (where you are assigned to serve).",
+          },
+          {
+            heading: "Reading Comprehension for Tests",
+            body: "Military aptitude tests typically include reading comprehension sections. Practicing active reading — identifying main ideas, context clues for unfamiliar words, and drawing logical conclusions — is directly applicable. Reading newspapers, instruction manuals, or official documents in English regularly is a practical way to build this skill.",
+          },
+        ],
+        checklistItems: [
+          "I am familiar with common military English terminology",
+          "I understand why English proficiency is important in many military contexts",
+          "I have a plan to improve my English reading and comprehension if needed",
+        ],
+      },
+      {
+        id: "english-communication",
+        title: "Speaking and Listening in a Military Environment",
+        summary: "Communication expectations in military settings and how to prepare.",
+        sections: [
+          {
+            heading: "Clear and Direct Communication",
+            body: "Military communication emphasizes clarity, brevity, and precision. Instructions are often direct and must be understood and acknowledged quickly. Practicing clear, concise verbal communication — rather than lengthy explanations — is a useful preparation strategy.",
+          },
+          {
+            heading: "Listening Under Stress",
+            body: "In training environments, you will need to absorb and act on instructions quickly, sometimes in noisy or high-pressure situations. Practicing active listening — focusing fully on what is being said, not planning your response — is a transferable skill.",
+          },
+        ],
+        checklistItems: [
+          "I understand that military communication is direct and brief",
+          "I have thought about how I can practice active listening",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "en-q1",
+        question: "What does 'MOS', 'AFSC', or 'trade' typically refer to in military contexts?",
+        options: [
+          "A type of military equipment",
+          "A rank level",
+          "Your job specialty or career field in the military",
+          "A training base location",
+        ],
+        correctAnswer: "Your job specialty or career field in the military",
+        explanation: "MOS (Military Occupational Specialty), AFSC (Air Force Specialty Code), Rate (Navy), and Trade (UK/Canada) all refer to the specific job or career field a service member is trained and assigned to.",
+        lessonId: "military-vocabulary",
+        lessonTitle: "Military English Vocabulary",
+      },
+    ],
+  },
+  {
+    id: "other-languages",
+    title: "Other Languages",
+    description: "Explore how additional language skills can benefit your military career, and what language requirements may apply.",
+    pdfSlug: "other-languages",
+    lessons: [
+      {
+        id: "language-value",
+        title: "Value of Language Skills in Military Service",
+        summary: "How second-language proficiency can open career opportunities in intelligence, special operations, and international liaison roles.",
+        sections: [
+          {
+            heading: "Language as a Career Asset",
+            body: "In many militaries, proficiency in a second language — particularly Arabic, Mandarin, Russian, Spanish, Korean, Pashto, or Farsi — can open doors to intelligence, counterterrorism, foreign liaison, and special operations roles. Some militaries offer language bonuses or special pay for verified language proficiency.",
+          },
+          {
+            heading: "Language Testing in the Military",
+            body: "The U.S. military uses the Defense Language Proficiency Test (DLPT) to assess language ability. The UK and other NATO countries have similar assessments. Demonstrating language proficiency before or during service can qualify you for specialized roles.",
+          },
+          {
+            heading: "French in the Canadian Forces",
+            body: "Canada's military has two official languages: English and French. Some roles — particularly those in administration, leadership, and certain operational positions — require bilingual proficiency. The Canadian Forces offer language training programs, but arriving with some French proficiency (or English, if French is your first language) is an advantage.",
+          },
+        ],
+        checklistItems: [
+          "I understand that second-language skills can expand my career options",
+          "I know the language assessment used by my target country's military",
+          "I have considered what languages might be most valuable for my target roles",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "ol-q1",
+        question: "In the Canadian Armed Forces, why is bilingual proficiency (English and French) sometimes important?",
+        options: [
+          "All Canadian Forces members must be bilingual",
+          "Canada has two official languages, and some roles require bilingual ability",
+          "French is only used on overseas deployments",
+          "Bilingual ability only affects pay, not career options",
+        ],
+        correctAnswer: "Canada has two official languages, and some roles require bilingual ability",
+        explanation: "Canada has two official languages, English and French. Certain roles — particularly in leadership and administration — may require bilingual proficiency. Language training is available but arriving with some proficiency is an advantage.",
+        lessonId: "language-value",
+        lessonTitle: "Value of Language Skills in Military Service",
+      },
+    ],
+  },
+  {
+    id: "career-paths",
+    title: "Career Paths",
+    description: "Explore the major career categories available in military service and how they can transfer to civilian life.",
+    pdfSlug: "career-paths",
+    lessons: [
+      {
+        id: "career-categories",
+        title: "Major Career Categories",
+        summary: "An overview of the main career areas in most military branches.",
+        sections: [
+          {
+            heading: "Combat and Security Roles",
+            body: "These roles involve direct engagement or preparation for combat. Examples: Infantry, Armor, Artillery, Special Forces, Military Police. These roles typically have the most demanding physical requirements and may have stricter age and fitness cutoffs.",
+          },
+          {
+            heading: "Technical and Engineering Roles",
+            body: "These roles involve maintaining, operating, or developing complex equipment and systems. Examples: Aircraft Maintenance, Electronics, Nuclear Engineering, Combat Engineering, Signals/Communications, Cyber Operations. Often require strong aptitude test scores in technical subjects.",
+          },
+          {
+            heading: "Medical and Health Roles",
+            body: "Military medical careers range from combat medic (providing emergency care in the field) to healthcare administrator, nurse, dentist, and physician. Some roles require prior medical education; others train you from entry level.",
+          },
+          {
+            heading: "Intelligence and Cyber",
+            body: "Intelligence analysts, signals intelligence operators, linguists, and cyber operations specialists work to gather and protect information. Often require security clearances and can have higher aptitude test score requirements.",
+          },
+          {
+            heading: "Logistics, Supply, and Administration",
+            body: "These roles keep military operations running — managing supply chains, financial records, personnel, legal processes, and transportation. They are widely available and often transfer well to civilian careers.",
+          },
+          {
+            heading: "Aviation",
+            body: "Pilots, flight crew, loadmasters, and aviation maintenance personnel support air operations. Pilot roles typically require the highest levels of testing, medical clearance, and training investment.",
+          },
+        ],
+        checklistItems: [
+          "I have identified 2–3 career categories that interest me",
+          "I understand that different roles have different educational and aptitude requirements",
+          "I know that some roles require additional testing, clearances, or qualifications",
+        ],
+      },
+      {
+        id: "civilian-transferability",
+        title: "Military Careers and Civilian Life",
+        summary: "How military training and experience can transfer to civilian employment.",
+        sections: [
+          {
+            heading: "Transferable Skills",
+            body: "Military service builds skills that are highly valued by civilian employers: leadership, discipline, teamwork, problem-solving under pressure, physical fitness, and adaptability. Many veterans find these soft skills set them apart in civilian job markets.",
+          },
+          {
+            heading: "Technical Certifications",
+            body: "Many military technical roles provide training equivalent to civilian certifications. A military avionics technician may hold qualifications equivalent to an FAA certificate. IT and cyber roles often translate to recognized civilian credentials. Researching the civilian equivalencies for a military job specialty before selecting it is worth doing.",
+          },
+          {
+            heading: "Education Benefits",
+            body: "Many militaries offer significant education assistance — from tuition assistance during service to post-service education benefits (like the U.S. GI Bill). Using these benefits can accelerate a second career after service. Verify current education benefits through official channels.",
+          },
+        ],
+        checklistItems: [
+          "I have thought about how military experience might benefit my long-term career",
+          "I have researched what civilian credentials, if any, my target military role may prepare me for",
+          "I understand that education benefits vary and should be verified",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "cp-q1",
+        question: "Which category of military role typically requires the highest physical fitness standards?",
+        options: [
+          "Logistics and Supply",
+          "Administration",
+          "Combat and Security roles (e.g., Infantry, Special Forces)",
+          "Finance and Legal",
+        ],
+        correctAnswer: "Combat and Security roles (e.g., Infantry, Special Forces)",
+        explanation: "Combat and security roles — such as infantry, special forces, and some security positions — typically have the most demanding physical requirements and may have stricter age, fitness, and health cutoffs.",
+        lessonId: "career-categories",
+        lessonTitle: "Major Career Categories",
+      },
+      {
+        id: "cp-q2",
+        question: "Why is it worth researching civilian equivalencies for military job specialties?",
+        options: [
+          "Military training is not recognized by any civilian employer",
+          "It allows you to plan ahead for career opportunities after service",
+          "Civilian certifications are required before military training",
+          "Only officer roles have civilian equivalencies",
+        ],
+        correctAnswer: "It allows you to plan ahead for career opportunities after service",
+        explanation: "Understanding the civilian value of military training — such as which certifications or credentials your role may help you earn — is useful for long-term career planning both inside and after military service.",
+        lessonId: "civilian-transferability",
+        lessonTitle: "Military Careers and Civilian Life",
+      },
+    ],
+  },
+  {
+    id: "documents-process",
+    title: "Documents & Process",
+    description: "Understand the general joining process, what documents you may need, and what the medical and background steps look like.",
+    pdfSlug: "documents-process",
+    lessons: [
+      {
+        id: "eligibility-basics",
+        title: "Eligibility Basics",
+        summary: "General eligibility factors most militaries consider — and why verification with official sources is essential.",
+        sections: [
+          {
+            heading: "Citizenship and Residency",
+            body: "Most militaries require citizenship of the relevant country. Some — including the U.S. and UK — accept permanent residents or certain Commonwealth citizens under specific conditions. Requirements change and vary by role. Always verify citizenship and residency requirements through official channels.",
+          },
+          {
+            heading: "Age Requirements",
+            body: "Minimum and maximum age limits vary by country, branch, and role. Most enlisted roles have a lower minimum age (often 17–18) and a maximum age that varies by country (often 28–42). Officer programs may have different age windows. Some roles have stricter age cutoffs. Waivers may be available in some cases — ask an official recruiter.",
+          },
+          {
+            heading: "Education",
+            body: "Most militaries require a high school diploma or equivalent as a minimum. Some branches or roles require additional education (associate or bachelor's degrees). GEDs or equivalent certificates may be accepted, sometimes with conditions. Verify what your specific target branch requires.",
+          },
+        ],
+        checklistItems: [
+          "I have verified my citizenship or residency eligibility for my target country and branch",
+          "I understand the age requirements for the roles I am considering",
+          "I know the education requirements for my target branch",
+        ],
+      },
+      {
+        id: "medical-process",
+        title: "The Medical Examination Process",
+        summary: "What to expect from the military medical screening process.",
+        sections: [
+          {
+            heading: "What the Medical Process Involves",
+            body: "Military medical exams are thorough. They typically assess vision, hearing, height and weight, blood pressure, musculoskeletal health (joints, spine, prior injuries), mental health history, and may include blood tests and urinalysis. The U.S. military uses the Military Entrance Processing Station (MEPS) for this process.",
+          },
+          {
+            heading: "Disqualifying Conditions",
+            body: "Certain medical conditions may temporarily or permanently disqualify an applicant. Examples can include certain vision levels, heart conditions, prior significant injuries, certain mental health diagnoses, and others. Waivers exist for some conditions — but not all. Being honest about your medical history is essential; misrepresentation can have serious consequences.",
+          },
+          {
+            heading: "Be Honest and Prepared",
+            body: "Disclose your medical history accurately during the process. Attempting to hide conditions is risky and unethical. If you have concerns about a specific medical issue, consulting a doctor before beginning the joining process is advisable to understand your situation.",
+          },
+        ],
+        checklistItems: [
+          "I understand what a military medical exam typically involves",
+          "I know to be honest about my medical history",
+          "I have identified any medical conditions I should discuss with a doctor or recruiter in advance",
+        ],
+      },
+      {
+        id: "required-documents",
+        title: "Required Documents",
+        summary: "The types of documents commonly required during the military joining process.",
+        sections: [
+          {
+            heading: "Common Documents to Prepare",
+            body: "Documents typically required include: government-issued photo ID or passport, birth certificate, social security card or national ID equivalent, high school diploma or transcripts, college transcripts if applicable, and documentation of any prior military service. Requirements vary by country — verify with official recruiting sources.",
+          },
+          {
+            heading: "Background Investigation",
+            body: "Many military roles — particularly those requiring security clearances — involve a background investigation. This may include a review of financial history, criminal record, prior addresses, foreign contacts, and references. Being prepared to discuss your history honestly, and resolving any outstanding legal or financial issues in advance, is advisable.",
+          },
+        ],
+        checklistItems: [
+          "I have identified the documents likely required for my target country and branch",
+          "I understand that security clearance roles involve a background investigation",
+          "I have no unresolved legal or financial issues that I have not considered discussing with a recruiter",
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "dp-q1",
+        question: "What should you do if you are unsure whether a medical condition disqualifies you from military service?",
+        options: [
+          "Assume you are disqualified and give up",
+          "Hide the condition during the medical exam",
+          "Consult a doctor and discuss with an official recruiter — waivers may be available",
+          "Only apply for roles you think have no medical standards",
+        ],
+        correctAnswer: "Consult a doctor and discuss with an official recruiter — waivers may be available",
+        explanation: "Some conditions that might seem disqualifying may be eligible for waivers. Consulting a doctor and discussing openly with an official recruiter is the best approach. Hiding conditions is risky and can have serious consequences.",
+        lessonId: "medical-process",
+        lessonTitle: "The Medical Examination Process",
+      },
+      {
+        id: "dp-q2",
+        question: "Why is honesty important when disclosing your medical or personal history during the joining process?",
+        options: [
+          "It is not important — military needs recruits regardless",
+          "Misrepresentation can have serious legal and professional consequences",
+          "It only affects your pay grade",
+          "Honesty slows down the process unnecessarily",
+        ],
+        correctAnswer: "Misrepresentation can have serious legal and professional consequences",
+        explanation: "Misrepresenting your medical or personal history during the military joining process is a serious matter that can result in disqualification, discharge, or legal action. Honesty protects you and ensures you are placed in a role that suits your actual situation.",
+        lessonId: "medical-process",
+        lessonTitle: "The Medical Examination Process",
+      },
+    ],
+  },
+];
+
+export function getModuleById(id: string): GuideModule | undefined {
+  return guideModules.find((m) => m.id === id);
+}

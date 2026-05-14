@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Confirm your email — Join Ready</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+    body { margin: 0; padding: 0; background-color: #070A08; }
+    a { color: #C2B280; text-decoration: none; }
+    a:hover { color: #D6A84F; }
+    .btn:hover { background-color: #8A9A5B !important; }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#070A08;font-family:'Inter','-apple-system','BlinkMacSystemFont','Segoe UI',sans-serif;">
+
+  <!-- Outer wrapper -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#070A08;min-height:100vh;">
+    <tr>
+      <td align="center" style="padding:48px 16px;">
+
+        <!-- Card -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:480px;width:100%;">
+
+          <!-- Logo block -->
+          <tr>
+            <td align="center" style="padding-bottom:28px;">
+
+              <!-- Shield SVG logo -->
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 12px;">
+                <path d="M24 4L8 10V24C8 33.6 15.2 42.4 24 44C32.8 42.4 40 33.6 40 24V10L24 4Z" fill="#182210" stroke="#5A7030" stroke-width="1.4"/>
+                <!-- rank stripes -->
+                <line x1="16" y1="26" x2="22" y2="20" stroke="#C2B280" stroke-width="1.6" stroke-linecap="round"/>
+                <line x1="20" y1="28" x2="28" y2="20" stroke="#C2B280" stroke-width="1.6" stroke-linecap="round"/>
+                <!-- checkmark -->
+                <polyline points="17,24 22,30 31,19" fill="none" stroke="#F4F1E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+
+              <div style="font-family:'Space Grotesk','Georgia',sans-serif;font-size:18px;font-weight:700;letter-spacing:-0.01em;color:#F4F1E8;">Join Ready</div>
+            </td>
+          </tr>
+
+          <!-- Main card -->
+          <tr>
+            <td style="background-color:#0B0F0A;border-radius:20px;border:1px solid rgba(138,154,91,0.18);padding:40px 36px;">
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+
+                <!-- Heading -->
+                <tr>
+                  <td align="center" style="padding-bottom:8px;">
+                    <h1 style="margin:0;font-family:'Space Grotesk','Georgia',sans-serif;font-size:22px;font-weight:700;color:#F4F1E8;letter-spacing:-0.02em;line-height:1.2;">Confirm your email address</h1>
+                  </td>
+                </tr>
+
+                <!-- Subtext -->
+                <tr>
+                  <td align="center" style="padding-bottom:32px;">
+                    <p style="margin:0;font-size:14px;color:#64748b;line-height:1.6;max-width:340px;">You're almost in. Click the button below to verify your email and activate your Join Ready account.</p>
+                  </td>
+                </tr>
+
+                <!-- Divider -->
+                <tr>
+                  <td style="padding-bottom:32px;">
+                    <div style="height:1px;background-color:rgba(255,255,255,0.05);"></div>
+                  </td>
+                </tr>
+
+                <!-- CTA Button -->
+                <tr>
+                  <td align="center" style="padding-bottom:32px;">
+                    <a href="{{ .ConfirmationURL }}" class="btn" style="display:inline-block;background-color:#6F8F3E;color:#ffffff;font-family:'Space Grotesk','Georgia',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.01em;text-decoration:none;padding:0 32px;height:50px;line-height:50px;border-radius:9999px;box-shadow:0 4px 24px rgba(111,143,62,0.25);">Confirm Email Address</a>
+                  </td>
+                </tr>
+
+                <!-- Divider -->
+                <tr>
+                  <td style="padding-bottom:24px;">
+                    <div style="height:1px;background-color:rgba(255,255,255,0.05);"></div>
+                  </td>
+                </tr>
+
+                <!-- Fallback link -->
+                <tr>
+                  <td align="center" style="padding-bottom:4px;">
+                    <p style="margin:0;font-size:11px;color:#475569;line-height:1.5;">Button not working? Copy and paste this link into your browser:</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center">
+                    <p style="margin:0;font-size:11px;word-break:break-all;"><a href="{{ .ConfirmationURL }}" style="color:#C2B280;text-decoration:underline;">{{ .ConfirmationURL }}</a></p>
+                  </td>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding-top:24px;">
+              <p style="margin:0 0 4px;font-size:10px;color:#334155;letter-spacing:0.02em;line-height:1.6;">If you didn't create a Join Ready account, you can safely ignore this email.</p>
+              <p style="margin:0;font-size:10px;color:#1e293b;letter-spacing:0.02em;">Join Ready is an independent educational resource. No recruiting. No commitments.</p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
