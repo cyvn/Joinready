@@ -37,7 +37,7 @@ function Beam({ rotate, opacity, delay, widthPx, heightPx, color = "99,102,241" 
       }}
       initial={{ opacity: 0, scaleY: 0 }}
       animate={{ opacity: 1, scaleY: 1 }}
-      transition={{ delay, duration: 2.0, ease: [0.23, 0.86, 0.39, 0.96] }}
+      transition={{ delay, duration: 2.0, ease: [0.23, 0.86, 0.39, 0.96] as const }}
     />
   );
 }

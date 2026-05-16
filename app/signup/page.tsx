@@ -1,14 +1,15 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Mail, Lock, UserPlus, AlertCircle } from "lucide-react";
 import { JoinReadyLogo } from "@/src/components/JoinReadyLogo";
-import { signup } from "@/app/auth/actions";
 import { BorderRotate } from "@/src/components/ui/animated-gradient-border";
 import { OAuthButtons } from "@/src/components/OAuthButtons";
+import { createClient } from "@/src/lib/supabase/client";
 
 export default function SignupPage() {
   return (
@@ -26,8 +27,35 @@ export default function SignupPage() {
 
 function SignupContent() {
   const searchParams = useSearchParams();
-  const error = searchParams.get("error");
+  const router = useRouter();
   const redirectTo = searchParams.get("redirectTo") ?? "";
+  const urlError = searchParams.get("error");
+
+  const [error, setError] = useState<string | null>(
+    urlError ? decodeURIComponent(urlError) : null
+  );
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const supabase = createClient();
+    const { error: authError } = await supabase.auth.signUp({ email, password });
+
+    if (authError) {
+      setError(authError.message);
+      setLoading(false);
+    } else {
+      router.push(redirectTo && redirectTo.startsWith("/") ? redirectTo : "/");
+      router.refresh();
+    }
+  };
 
   return (
     <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 py-12">
@@ -64,11 +92,11 @@ function SignupContent() {
               className="flex items-start gap-2.5 rounded-xl border border-rose-500/20 bg-rose-500/[0.07] px-3.5 py-3"
             >
               <AlertCircle className="h-4 w-4 text-rose-400 flex-shrink-0 mt-0.5" />
-              <p className="text-xs text-rose-400 leading-relaxed">{decodeURIComponent(error)}</p>
+              <p className="text-xs text-rose-400 leading-relaxed">{error}</p>
             </motion.div>
           )}
 
-          <form action={signup} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <input type="hidden" name="redirectTo" value={redirectTo} />
 
             <div className="space-y-2">
@@ -104,10 +132,11 @@ function SignupContent() {
 
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 rounded-full bg-[#6F8F3E] hover:bg-[#8A9A5B] active:scale-[0.98] text-white font-display font-semibold text-sm h-[50px] transition-all shadow-lg shadow-[#6F8F3E]/20"
+              disabled={loading}
+              className="w-full flex items-center justify-center gap-2 rounded-full bg-[#6F8F3E] hover:bg-[#8A9A5B] active:scale-[0.98] text-white font-display font-semibold text-sm h-[50px] transition-all shadow-lg shadow-[#6F8F3E]/20 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <UserPlus className="h-4 w-4" />
-              Create Account
+              {loading ? "Creating account…" : "Create Account"}
             </button>
           </form>
 

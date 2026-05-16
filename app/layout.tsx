@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   description:
     "Join Ready helps future applicants understand military options by country and branch — before speaking with a recruiter. An independent educational resource.",
   keywords: ["military", "joining", "guide", "army", "navy", "air force", "preparation"],
+  icons: {
+    icon: "/icon.svg",
+  },
   openGraph: {
     title: "Join Ready",
     description: "Understand your military options before making a commitment.",

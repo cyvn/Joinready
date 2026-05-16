@@ -1,13 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Mail, AlertCircle, CheckCircle, ArrowLeft } from "lucide-react";
 import { JoinReadyLogo } from "@/src/components/JoinReadyLogo";
-import { forgotPassword } from "@/app/auth/actions";
 import { BorderRotate } from "@/src/components/ui/animated-gradient-border";
+import { createClient } from "@/src/lib/supabase/client";
 
 export default function ForgotPasswordPage() {
   return (
@@ -25,8 +26,36 @@ export default function ForgotPasswordPage() {
 
 function ForgotPasswordContent() {
   const searchParams = useSearchParams();
-  const error = searchParams.get("error");
-  const sent = searchParams.get("sent");
+  const urlError = searchParams.get("error");
+
+  const [error, setError] = useState<string | null>(
+    urlError ? decodeURIComponent(urlError) : null
+  );
+  const [sent, setSent] = useState(!!searchParams.get("sent"));
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+
+    const supabase = createClient();
+    const redirectUrl = `${window.location.origin}/auth/callback?next=/auth/reset-password`;
+    const { error: authError } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: redirectUrl,
+    });
+
+    if (authError) {
+      setError(authError.message);
+      setLoading(false);
+    } else {
+      setSent(true);
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 py-12">
@@ -75,11 +104,11 @@ function ForgotPasswordContent() {
                   className="flex items-start gap-2.5 rounded-xl border border-rose-500/20 bg-rose-500/[0.07] px-3.5 py-3"
                 >
                   <AlertCircle className="h-4 w-4 text-rose-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-xs text-rose-400 leading-relaxed">{decodeURIComponent(error)}</p>
+                  <p className="text-xs text-rose-400 leading-relaxed">{error}</p>
                 </motion.div>
               )}
 
-              <form action={forgotPassword} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
                   <label className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
                     <Mail className="h-3 w-3" />
@@ -97,9 +126,10 @@ function ForgotPasswordContent() {
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 rounded-full bg-[#6F8F3E] hover:bg-[#8A9A5B] active:scale-[0.98] text-white font-display font-semibold text-sm h-[48px] transition-all shadow-lg shadow-[#6F8F3E]/20"
+                  disabled={loading}
+                  className="w-full flex items-center justify-center gap-2 rounded-full bg-[#6F8F3E] hover:bg-[#8A9A5B] active:scale-[0.98] text-white font-display font-semibold text-sm h-[48px] transition-all shadow-lg shadow-[#6F8F3E]/20 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send reset link
+                  {loading ? "Sending…" : "Send reset link"}
                 </button>
               </form>
             </>

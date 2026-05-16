@@ -96,7 +96,13 @@
       "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\cy\\\\Desktop\\\\joinready\\\\app\" -Recurse | Where-Object { $_.Extension -in @\\('.tsx', '.ts'\\) } | Select-Object -Property FullName)",
       "Bash(xargs grep -l \"config\\\\|const\\\\|STORE\\\\|URL\")",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\cy\\\\Desktop\\\\joinready\" -Recurse -Depth 2)",
-      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\cy\\\\Desktop\\\\joinready\" -Recurse -Depth 2 | Select-Object FullName | ForEach-Object { $_.FullName })"
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\cy\\\\Desktop\\\\joinready\" -Recurse -Depth 2 | Select-Object FullName | ForEach-Object { $_.FullName })",
+      "Bash(del \"app\\\\api\\\\pdf\\\\full-guide\\\\route.ts\")",
+      "Bash(del \"app\\\\api\\\\pdf\\\\module\\\\route.ts\")",
+      "Bash(del \"app\\\\api\\\\pdf\\\\checklist\\\\route.ts\")",
+      "Bash(del \"app\\\\auth\\\\callback\\\\route.ts\")",
+      "Bash(del \"app\\\\auth\\\\actions.ts\")",
+      "Bash(echo \"EXIT CODE: $?\")"
     ]
   }
 }
