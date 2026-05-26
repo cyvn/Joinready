@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, LogIn } from "lucide-react";
 import { JoinReadyLogo } from "@/src/components/JoinReadyLogo";
 import type { User } from "@supabase/supabase-js";
-import { createClient } from "@/src/lib/supabase/client";
+import { createClient, supabaseEnvConfigured } from "@/src/lib/supabase/client";
 import { UserMenu, MobileUserSection } from "@/src/components/UserMenu";
 
 const NAV_LINKS = [
@@ -34,6 +34,8 @@ export function JoinReadyNavbar() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
+    if (!supabaseEnvConfigured()) return;
+
     const supabase = createClient();
 
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -50,6 +52,7 @@ export function JoinReadyNavbar() {
   }, []);
 
   const handleSignOut = async () => {
+    if (!supabaseEnvConfigured()) return;
     const supabase = createClient();
     await supabase.auth.signOut();
     setOpen(false);
