@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { createClient } from "@/src/lib/supabase/client";
+import { createClient, supabaseEnvConfigured } from "@/src/lib/supabase/client";
 
 export default function AuthCallbackPage() {
   return (
@@ -28,32 +28,48 @@ function CallbackHandler() {
     if (handled.current) return;
     handled.current = true;
 
-    const code = searchParams.get("code");
-    const next = searchParams.get("next") || "/";
     const oauthError = searchParams.get("error");
-    const oauthErrorDescription = searchParams.get("error_description");
-
     if (oauthError) {
-      const message = encodeURIComponent(oauthErrorDescription || oauthError || "OAuth sign in failed");
-      router.replace(`/login?error=${message}`);
+      const msg = searchParams.get("error_description") || oauthError;
+      router.replace(`/login?error=${encodeURIComponent(msg)}`);
       return;
     }
 
-    if (!code) {
-      const message = encodeURIComponent("OAuth callback did not include a code.");
-      router.replace(`/login?error=${message}`);
+    if (!supabaseEnvConfigured()) {
+      router.replace(`/login?error=${encodeURIComponent("Auth service not configured.")}`);
       return;
     }
+
+    const next = searchParams.get("next") || "/";
+    const safeNext = next.startsWith("/") ? next : "/";
 
     const supabase = createClient();
-    supabase.auth.exchangeCodeForSession(code).then(({ error }) => {
-      if (error) {
-        const message = encodeURIComponent(error.message || "Auth callback failed");
-        router.replace(`/login?error=${message}`);
+
+    // Implicit flow: Supabase auto-detects tokens from URL hash via detectSessionInUrl.
+    // Check immediately in case the session is already established.
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        router.replace(safeNext);
         return;
       }
-      const safeNext = next.startsWith("/") ? next : "/";
-      router.replace(safeNext);
+
+      // Not ready yet — listen for the SIGNED_IN event.
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((event, sess) => {
+        if (event === "SIGNED_IN" && sess) {
+          subscription.unsubscribe();
+          router.replace(safeNext);
+        }
+      });
+
+      const timeout = setTimeout(() => {
+        subscription.unsubscribe();
+        router.replace(`/login?error=${encodeURIComponent("Sign in timed out. Please try again.")}`);
+      }, 10000);
+
+      return () => {
+        subscription.unsubscribe();
+        clearTimeout(timeout);
+      };
     });
   }, [router, searchParams]);
 

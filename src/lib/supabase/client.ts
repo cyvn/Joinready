@@ -19,5 +19,7 @@ export function createClient() {
     );
   }
 
-  return createBrowserClient(supabaseUrl!, supabaseAnonKey!);
+  return createBrowserClient(supabaseUrl!, supabaseAnonKey!, {
+    auth: { flowType: "implicit" },
+  });
 }
