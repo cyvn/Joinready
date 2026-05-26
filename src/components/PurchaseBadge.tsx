@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 import { isBadgeVisible, dismissBadge, markBadgeFirstSeen } from "@/src/lib/cart";
 
 const SHOPIFY_STORE_URL =
-  process.env.NEXT_PUBLIC_SHOPIFY_STORE_URL ?? "https://joinready.myshopify.com";
+  process.env.NEXT_PUBLIC_SHOPIFY_STORE_URL ?? "https://join-ready.myshopify.com";
 
 export function PurchaseBadge() {
   const [visible, setVisible] = useState(false);
