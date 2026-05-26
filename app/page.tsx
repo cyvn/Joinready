@@ -93,7 +93,7 @@ function HomeContent() {
   const bothSelected = !!(country && branch);
 
   useEffect(() => {
-    if (!country && !branch) { router.replace("/", { scroll: false }); return; }
+    if (!country && !branch) return;
     const p = new URLSearchParams();
     if (country) p.set("country", country);
     if (branch) p.set("branch", branch);
