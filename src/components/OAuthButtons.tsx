@@ -74,7 +74,8 @@ export function OAuthButtons({
       localStorage.setItem("joinready:last_oauth_provider", provider);
 
       const supabase = createClient();
-      const redirectTo = `${window.location.origin}/auth/callback`;
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+      const redirectTo = `${window.location.origin}${basePath}/auth/callback`;
 
       console.log("[Auth/oauth] Starting OAuth", {
         provider,
