@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  basePath: "/Joinready",
   reactStrictMode: true,
   images: {
     unoptimized: true,
