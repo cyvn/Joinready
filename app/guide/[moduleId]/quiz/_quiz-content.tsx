@@ -70,7 +70,7 @@ export function QuizContent({ moduleId }: { moduleId: string }) {
       <ModuleQuiz module={module} country={country} branch={branch} />
 
       <div className="pt-4">
-        <PdfDownloadButton type="full-guide" country={country} branch={branch} label="Download Full Guide PDF" />
+        <PdfDownloadButton type="full-guide" country={country} branch={branch} label="Get Complete Guide PDF" />
       </div>
     </div>
     </AnimatedPage>

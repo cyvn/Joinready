@@ -56,10 +56,10 @@ export default function TermsPage() {
                 <p className="text-[12px] text-slate-600">
                   Contact:{" "}
                   <a
-                    href="mailto:contact@join-ready.com"
+                    href="mailto:join-ready@outlook.com"
                     className="text-[#8A9A5B] hover:text-[#C2B280] transition-colors"
                   >
-                    contact@join-ready.com
+                    join-ready@outlook.com
                   </a>
                 </p>
               </div>

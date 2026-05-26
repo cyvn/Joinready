@@ -50,8 +50,7 @@ export function ModuleContent({ moduleId }: { moduleId: string }) {
       </div>
 
       <div className="flex flex-wrap gap-3">
-        <PdfDownloadButton type="module" country={country} branch={branch} moduleSlug={module.pdfSlug} />
-        <PdfDownloadButton type="full-guide" country={country} branch={branch} label="Download Full Guide PDF" />
+        <PdfDownloadButton type="full-guide" country={country} branch={branch} label="Get Complete Guide PDF" />
       </div>
 
       <ModuleLessonView module={module} country={country} branch={branch} />

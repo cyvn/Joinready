@@ -48,8 +48,8 @@ const IDENTITY = [
 ];
 
 const SOCIALS = [
-  { Icon: TikTokIcon, label: "TikTok", href: "https://www.tiktok.com/@joinready" },
-  { Icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/joinready" },
+  { Icon: TikTokIcon, label: "TikTok", href: "https://www.tiktok.com/@cyklxs" },
+  { Icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/cy.usmc" },
   { Icon: Mail, label: "Email", href: "mailto:join-ready@outlook.com" },
   { Icon: Globe, label: "Website", href: "https://join-ready.com" },
 ];

@@ -1,6 +1,11 @@
 "use client";
 
-import { createClient } from "@/src/lib/supabase/client";
+import { useState } from "react";
+import { createClient, supabaseEnvConfigured } from "@/src/lib/supabase/client";
+
+type OAuthProvider = "google" | "github" | "discord" | "apple";
+
+const ENABLE_APPLE = false;
 
 function GoogleIcon({ className }: { className?: string }) {
   return (
@@ -21,37 +26,135 @@ function GitHubIcon({ className }: { className?: string }) {
   );
 }
 
-export function OAuthButtons({ redirectTo }: { redirectTo?: string }) {
-  const handleOAuth = async (provider: "google" | "github") => {
-    const supabase = createClient();
-    await supabase.auth.signInWithOAuth({
-      provider,
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback${
-          redirectTo ? `?next=${encodeURIComponent(redirectTo)}` : ""
-        }`,
-      },
-    });
-  };
+function DiscordIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="#5865F2" aria-hidden>
+      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.001.022.015.043.031.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+    </svg>
+  );
+}
+
+function AppleIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+    </svg>
+  );
+}
+
+function Spinner() {
+  return (
+    <span className="h-4 w-4 rounded-full border-2 border-current border-t-transparent animate-spin flex-shrink-0" />
+  );
+}
+
+export function OAuthButtons({
+  onError,
+}: {
+  onError?: (message: string | null) => void;
+}) {
+  const [activeProvider, setActiveProvider] = useState<OAuthProvider | null>(null);
+
+  async function handleOAuth(provider: OAuthProvider) {
+    if (activeProvider) return;
+
+    setActiveProvider(provider);
+    onError?.(null);
+
+    if (!supabaseEnvConfigured()) {
+      onError?.(
+        "Authentication service is not configured. Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local."
+      );
+      setActiveProvider(null);
+      return;
+    }
+
+    try {
+      // Persist the clicked provider so the UI can show the correct label after redirect.
+      localStorage.setItem("joinready:last_oauth_provider", provider);
+
+      const supabase = createClient();
+      const redirectTo = `${window.location.origin}/auth/callback`;
+
+      console.log("[Auth/oauth] Starting OAuth", {
+        provider,
+        origin: window.location.origin,
+        redirectTo,
+      });
+
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo,
+        },
+      });
+
+      if (error) {
+        console.error(`[Auth/oauth/${provider}] Supabase error:`, error);
+        onError?.(error.message);
+        setActiveProvider(null);
+        return;
+      }
+
+      console.log("[Auth/oauth] Redirecting to provider", {
+        provider,
+        hasUrl: Boolean(data?.url),
+      });
+      // Browser navigates away — keep button in loading state
+    } catch (err) {
+      console.error(`[Auth/oauth/${provider}] Unexpected error:`, err);
+      onError?.(
+        err instanceof Error ? err.message : "Something went wrong during OAuth sign in."
+      );
+      setActiveProvider(null);
+    }
+  }
+
+  const busy = activeProvider !== null;
 
   return (
     <div className="space-y-2">
       <button
         type="button"
         onClick={() => handleOAuth("google")}
-        className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-white/[0.1] bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/[0.2] text-slate-300 text-sm font-medium h-[44px] transition-all"
+        disabled={busy}
+        className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-white/[0.1] bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/[0.2] text-slate-300 text-sm font-medium h-[44px] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        <GoogleIcon className="h-4 w-4" />
-        Continue with Google
+        {activeProvider === "google" ? <Spinner /> : <GoogleIcon className="h-4 w-4" />}
+        {activeProvider === "google" ? "Connecting…" : "Continue with Google"}
       </button>
+
       <button
         type="button"
         onClick={() => handleOAuth("github")}
-        className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-white/[0.1] bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/[0.2] text-slate-300 text-sm font-medium h-[44px] transition-all"
+        disabled={busy}
+        className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-white/[0.1] bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/[0.2] text-slate-300 text-sm font-medium h-[44px] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        <GitHubIcon className="h-4 w-4 text-slate-300" />
-        Continue with GitHub
+        {activeProvider === "github" ? <Spinner /> : <GitHubIcon className="h-4 w-4 text-slate-300" />}
+        {activeProvider === "github" ? "Connecting…" : "Continue with GitHub"}
       </button>
+
+      <button
+        type="button"
+        onClick={() => handleOAuth("discord")}
+        disabled={busy}
+        className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-white/[0.1] bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/[0.2] text-slate-300 text-sm font-medium h-[44px] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {activeProvider === "discord" ? <Spinner /> : <DiscordIcon className="h-4 w-4" />}
+        {activeProvider === "discord" ? "Connecting…" : "Continue with Discord"}
+      </button>
+
+      {ENABLE_APPLE && (
+        <button
+          type="button"
+          onClick={() => handleOAuth("apple")}
+          disabled={busy}
+          className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-white/[0.1] bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/[0.2] text-slate-300 text-sm font-medium h-[44px] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {activeProvider === "apple" ? <Spinner /> : <AppleIcon className="h-4 w-4" />}
+          {activeProvider === "apple" ? "Connecting…" : "Continue with Apple"}
+        </button>
+      )}
     </div>
   );
 }

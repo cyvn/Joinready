@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, LogIn } from "lucide-react";
 import { JoinReadyLogo } from "@/src/components/JoinReadyLogo";
+import type { User } from "@supabase/supabase-js";
+import { createClient } from "@/src/lib/supabase/client";
+import { UserMenu, MobileUserSection } from "@/src/components/UserMenu";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -28,6 +31,29 @@ const ACTIVE_PILL_STYLE: React.CSSProperties = {
 export function JoinReadyNavbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    setOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 bg-transparent pointer-events-none">
@@ -77,15 +103,19 @@ export function JoinReadyNavbar() {
 
         {/* Col 3 — Desktop CTA + mobile hamburger (right-aligned) */}
         <div className="flex items-center justify-end">
-          {/* Desktop: Sign In */}
+          {/* Desktop: UserMenu when signed in, Sign In when signed out */}
           <div className="hidden md:flex items-center">
-            <Link
-              href="/login"
-              className="flex items-center gap-1.5 text-[12px] font-medium text-slate-400 hover:text-slate-200 transition-colors px-2 py-1.5"
-            >
-              <LogIn className="h-3.5 w-3.5" />
-              Sign In
-            </Link>
+            {user ? (
+              <UserMenu user={user} onSignOut={handleSignOut} />
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center gap-1.5 text-[12px] font-medium text-slate-400 hover:text-slate-200 transition-colors px-2 py-1.5"
+              >
+                <LogIn className="h-3.5 w-3.5" />
+                Sign In
+              </Link>
+            )}
           </div>
 
           {/* Mobile hamburger */}
@@ -140,14 +170,20 @@ export function JoinReadyNavbar() {
                   </Link>
                 );
               })}
-              <Link
-                href="/login"
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-slate-500 hover:text-white hover:bg-white/[0.04] border border-transparent transition-colors"
-              >
-                <LogIn className="h-4 w-4" />
-                Sign In
-              </Link>
+
+              {/* Mobile auth section */}
+              {user ? (
+                <MobileUserSection user={user} onSignOut={handleSignOut} />
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-slate-500 hover:text-white hover:bg-white/[0.04] border border-transparent transition-colors"
+                >
+                  <LogIn className="h-4 w-4" />
+                  Sign In
+                </Link>
+              )}
             </nav>
           </motion.div>
         )}

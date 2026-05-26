@@ -66,17 +66,17 @@ export function PurchaseBadge() {
               style={{ background: "rgba(255,255,255,0.025)" }}
             />
 
-            {/* Physical Copy | Take me there */}
+            {/* Preparation Book | Purchase now */}
             <span className="relative flex items-center gap-2.5 px-4 text-[12px] whitespace-nowrap">
               <span className="font-semibold tracking-wide" style={{ color: "#C2B280" }}>
-                Physical Copy
+                Preparation Book
               </span>
               <span className="opacity-30" style={{ color: "#C2B280" }}>|</span>
               <span
                 className="font-semibold flex items-center gap-1"
                 style={{ color: hovered ? "#C2B280" : "#8A9A5B", transition: "color 0.2s" }}
               >
-                Take me there
+                Purchase now
                 <svg
                   className="h-3 w-3 flex-shrink-0"
                   fill="none"

@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { CheckCircle2, Circle, BookOpen, HelpCircle, ChevronRight } from "lucide-react";
-import { PdfDownloadButton } from "@/src/components/PdfDownloadButton";
 import { HoverBorderGradient } from "@/src/components/ui/hover-border-gradient";
 import type { GuideModule, ModuleProgress } from "@/src/types/guide";
 
@@ -86,19 +85,9 @@ export function GuideModuleCard({ module, progress, country, branch, index }: Pr
       </div>
 
       <div
-        className="flex items-center justify-between pt-3 border-t border-[rgba(194,178,128,0.06)] group-hover:border-[rgba(194,178,128,0.12)] transition-colors"
+        className="flex items-center justify-end pt-3 border-t border-[rgba(194,178,128,0.06)] group-hover:border-[rgba(194,178,128,0.12)] transition-colors"
         onClick={(e) => e.stopPropagation()}
       >
-        <PdfDownloadButton
-          type="module"
-          country={country}
-          branch={branch}
-          moduleSlug={module.pdfSlug}
-          label="PDF"
-          variant="ghost"
-          className="text-[11px] py-1 px-2 text-slate-600 hover:text-slate-400"
-        />
-
         <HoverBorderGradient
           as="button"
           onClick={(e: React.MouseEvent) => { e.stopPropagation(); router.push(moduleUrl); }}

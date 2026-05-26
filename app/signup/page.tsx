@@ -1,15 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Mail, Lock, UserPlus, AlertCircle } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import { JoinReadyLogo } from "@/src/components/JoinReadyLogo";
 import { BorderRotate } from "@/src/components/ui/animated-gradient-border";
 import { OAuthButtons } from "@/src/components/OAuthButtons";
-import { createClient } from "@/src/lib/supabase/client";
 
 export default function SignupPage() {
   return (
@@ -27,35 +26,11 @@ export default function SignupPage() {
 
 function SignupContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const redirectTo = searchParams.get("redirectTo") ?? "";
   const urlError = searchParams.get("error");
 
   const [error, setError] = useState<string | null>(
     urlError ? decodeURIComponent(urlError) : null
   );
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
-
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-
-    const supabase = createClient();
-    const { error: authError } = await supabase.auth.signUp({ email, password });
-
-    if (authError) {
-      setError(authError.message);
-      setLoading(false);
-    } else {
-      router.push(redirectTo && redirectTo.startsWith("/") ? redirectTo : "/");
-      router.refresh();
-    }
-  };
 
   return (
     <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 py-12">
@@ -65,7 +40,6 @@ function SignupContent() {
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="w-full max-w-[420px]"
       >
-        {/* Logo */}
         <div className="text-center mb-8 space-y-3">
           <div className="flex justify-center">
             <JoinReadyLogo size={48} />
@@ -83,7 +57,7 @@ function SignupContent() {
           borderRadius={20}
           animationMode="auto-rotate"
           animationSpeed={12}
-          className="p-6 space-y-5"
+          className="p-6 space-y-4"
         >
           {error && (
             <motion.div
@@ -96,66 +70,13 @@ function SignupContent() {
             </motion.div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input type="hidden" name="redirectTo" value={redirectTo} />
-
-            <div className="space-y-2">
-              <label className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                <Mail className="h-3 w-3" />
-                Email
-              </label>
-              <input
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                placeholder="you@example.com"
-                className="w-full rounded-xl border border-white/[0.09] bg-[#0C1509] px-4 h-[50px] text-sm text-slate-100 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-[#8A9A5B]/30 focus:border-[#8A9A5B]/40 transition-all hover:border-white/[0.17]"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                <Lock className="h-3 w-3" />
-                Password
-              </label>
-              <input
-                name="password"
-                type="password"
-                required
-                minLength={8}
-                autoComplete="new-password"
-                placeholder="Minimum 8 characters"
-                className="w-full rounded-xl border border-white/[0.09] bg-[#0C1509] px-4 h-[50px] text-sm text-slate-100 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-[#8A9A5B]/30 focus:border-[#8A9A5B]/40 transition-all hover:border-white/[0.17]"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full flex items-center justify-center gap-2 rounded-full bg-[#6F8F3E] hover:bg-[#8A9A5B] active:scale-[0.98] text-white font-display font-semibold text-sm h-[50px] transition-all shadow-lg shadow-[#6F8F3E]/20 disabled:opacity-60 disabled:cursor-not-allowed"
-            >
-              <UserPlus className="h-4 w-4" />
-              {loading ? "Creating account…" : "Create Account"}
-            </button>
-          </form>
-
-          <div className="relative flex items-center gap-3">
-            <div className="flex-1 h-px bg-white/[0.05]" />
-            <span className="text-[10px] text-slate-600 uppercase tracking-widest">or</span>
-            <div className="flex-1 h-px bg-white/[0.05]" />
-          </div>
-
-          <OAuthButtons redirectTo={redirectTo || undefined} />
+          <OAuthButtons onError={setError} />
 
           <div className="h-px bg-white/[0.05]" />
 
           <p className="text-center text-xs text-slate-600">
             Already have an account?{" "}
-            <Link
-              href={`/login${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ""}`}
-              className="text-[#C2B280] hover:text-[#D6A84F] font-medium transition-colors"
-            >
+            <Link href="/login" className="text-[#C2B280] hover:text-[#D6A84F] font-medium transition-colors">
               Sign in
             </Link>
           </p>
