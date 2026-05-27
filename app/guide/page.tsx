@@ -9,6 +9,7 @@ import { EmptyGuideState } from "@/src/components/EmptyGuideState";
 import { AnimatedPage } from "@/src/components/AnimatedPage";
 import { GuideModuleCard } from "@/src/components/GuideModuleCard";
 import { PdfDownloadButton } from "@/src/components/PdfDownloadButton";
+import { RoleRequirementsButton } from "@/src/components/RoleRequirementsButton";
 import { guideModules } from "@/src/data/guide-modules";
 import { allCountries } from "@/src/data/countries";
 import { getBranchData } from "@/src/data/military-data";
@@ -88,7 +89,10 @@ function GuideDashboard() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.15 }}
         >
-          <PdfDownloadButton type="full-guide" country={country} branch={branch} />
+          <div className="flex flex-wrap items-center gap-3">
+            <PdfDownloadButton type="full-guide" country={country} branch={branch} />
+            <RoleRequirementsButton country={country} branch={branch} />
+          </div>
         </motion.div>
 
         {/* Module grid */}
