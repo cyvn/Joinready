@@ -4,7 +4,7 @@ import { ExternalLink } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 
 const SHOPIFY_STORE_URL =
-  process.env.NEXT_PUBLIC_SHOPIFY_STORE_URL ?? "https://joinready.myshopify.com";
+  process.env.NEXT_PUBLIC_SHOPIFY_STORE_URL ?? "https://join-ready.myshopify.com";
 
 interface Props {
   type: "full-guide" | "checklist" | "module";
